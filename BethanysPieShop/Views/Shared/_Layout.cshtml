@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <!-- Bootstrap Framework -->
+    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="~/Content/site.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead">
+                    <img class="img-responsive" src="~/images/bethanylogo.png" alt="Bethany's Pie Shop" />
+                </p>
+            </div> <!--end col-->
+            <div class="col-md-9">
+                @RenderBody()
+            </div> <!--end col-->
+        </div> <!--end row-->
+    </div> <!--end container-->
+
+    <!-- Bootstrap JS -->
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+</body>
+</html>

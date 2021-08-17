@@ -43,7 +43,7 @@ namespace BethanysPieShop
 
             app.UseHttpsRedirection(); // Redirects HTTP-requests to HTTPS.
 
-            app.UseStaticFiles(); // Serves static files such as JS, CSS, images etc.
+            app.UseStaticFiles(); // Serves static files such as JS, CSS, images etc in the wwwroot-folder.
             
             app.UseRouting();
 

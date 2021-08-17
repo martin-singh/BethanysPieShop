@@ -1,19 +1,23 @@
 using BethanysPieShop.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BethanysPieShop
 {
     // Startup -> 2 things mainly: Define the request handling pipeline and configure all services needed thru out the app.
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             // Register services here (through dependency injection):
@@ -21,9 +25,12 @@ namespace BethanysPieShop
             // Framework services...
             services.AddControllersWithViews(); // Bring in support for working with MVC.
 
+            services.AddDbContext<AppDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); // Local DB
+
             //Our own services...
-            services.AddScoped<IPieRepository, MockPieRepository>(); // AddScoped -> creates one instance per HTTP-request.
-            services.AddScoped<ICategoryRepository, MockCategoryRepository>();
+            services.AddScoped<IPieRepository, PieRepository>(); // AddScoped -> creates one instance per HTTP-request.
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

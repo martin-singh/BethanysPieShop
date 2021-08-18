@@ -31,6 +31,9 @@ namespace BethanysPieShop
             //Our own services...
             services.AddScoped<IPieRepository, PieRepository>(); // AddScoped -> creates one instance per HTTP-request.
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+            services.AddHttpContextAccessor();
+            services.AddSession();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -44,7 +47,9 @@ namespace BethanysPieShop
             app.UseHttpsRedirection(); // Redirects HTTP-requests to HTTPS.
 
             app.UseStaticFiles(); // Serves static files such as JS, CSS, images etc in the wwwroot-folder.
-            
+
+            app.UseSession(); // For sessions.
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

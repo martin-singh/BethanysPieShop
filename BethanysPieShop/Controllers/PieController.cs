@@ -1,6 +1,8 @@
 ﻿using BethanysPieShop.Models;
 using BethanysPieShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BethanysPieShop.Controllers
 {
@@ -16,12 +18,27 @@ namespace BethanysPieShop.Controllers
         }
 
         // GET: Pie/List
-        public ViewResult List()
+        public ViewResult List(string category)
         {
+            IEnumerable<Pie> pies;
+            string currentCategory;
+
+            if (string.IsNullOrWhiteSpace(category))
+            {
+                pies = _pieRepository.AllPies.OrderBy(p => p.PieId);
+                currentCategory = "All pies";
+            }
+            else
+            {
+                pies = _pieRepository.AllPies.Where(p => p.Category.CategoryName == category);
+                currentCategory = _categoryRepository.AllCategories
+                    .FirstOrDefault(c => c.CategoryName == category)?.CategoryName;
+            }
+
             var piesListViewModel = new PiesListViewModel
             {
-                Pies = _pieRepository.AllPies,
-                CurrentCategory = "Cheese cakes"
+                Pies = pies,
+                CurrentCategory = currentCategory
             };
             return View(piesListViewModel);
         }

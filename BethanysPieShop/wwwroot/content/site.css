@@ -10,14 +10,14 @@
     border-color: #a593c2 !important;
 }
 
+.navbar-brand {
+    color: #23cfa7 !important;
+}
+
 .navbar-nav > li > a {
     font-size: 1.2em;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
     color: white !important;
-}
-
-.slide-image {
-    width: 100%;
 }
 
 .carousel-holder {
@@ -28,6 +28,11 @@
 .item {
     border-radius: 4px;
 }
+
+.slide-image {
+    width: 100%;
+}
+
 
 .caption {
     height: 130px;
@@ -48,7 +53,10 @@
 }
 
 .thumbnail {
+    border: 1px solid #cbcbcb;
+    border-radius: 5px;
     padding: 0;
+    background-color: #fff;
 }
 
 .thumbnail .caption-full {
